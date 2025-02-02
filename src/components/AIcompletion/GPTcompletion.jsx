@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { SettingsContext } from '../../contexts/Settings'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import Icon from '../../chatGPT/Icon'
-import createCompletion from '../../chatGPT/createCompletion'
+import createCompletionChatGPT from '../../chatGPT/createCompletion'
 import classes from './AIcompletion.module.css'
 
 function getAiConfigMessage(language) {
@@ -23,13 +23,13 @@ function getAiConfigMessage(language) {
 }
 
 
-function AIcompletion({ query, className }) {
+function GPTAIcompletion({ query, className }) {
   // settings
   const settings = useContext(SettingsContext)
-  const enabled = settings.query.AI.enabled
-  const apiKey = settings.query.AI.apiKey
-  const temperature = settings.query.AI.temperature
-  const language = settings.query.AI.language
+  const enabled = settings.query.AI.ChatGPT.enabled
+  const apiKey = settings.query.AI.ChatGPT.apiKey
+  const temperature = settings.query.AI.ChatGPT.temperature
+  const language = settings.query.AI.ChatGPT.language
   
   const [completion, setCompletion] = useState('')
   const chatLogRef = useRef([])
@@ -44,7 +44,7 @@ function AIcompletion({ query, className }) {
       const currentQuery = { content: query, role: 'user' }
       const messages = [getAiConfigMessage(language), ...chatLogRef.current, currentQuery ]
       
-      const completionRequest = createCompletion(
+      const completionRequest = createCompletionChatGPT(
         setCompletion,
         messages,
         temperature,
@@ -66,7 +66,7 @@ function AIcompletion({ query, className }) {
     return null
 
   return <>
-    <Icon className={classes['icon']} onClick={e => e.stopPropagation()}/>
+    <Icon className={classes['gemini-icon']} onClick={e => e.stopPropagation()}/>
     <div className={className} onClick={e => e.stopPropagation()}>
       <div className={classes['md-container']}>
         <ReactMarkdown children={completion}/> 
@@ -75,4 +75,4 @@ function AIcompletion({ query, className }) {
   </>
 }
 
-export default AIcompletion
+export default GPTAIcompletion

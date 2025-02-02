@@ -90,6 +90,7 @@ const template = {
       )
     },
     AI: {
+      ChatGPT:{
       enabled: new types.Switch(true),
       apiKey: new types.Input('', 'Enter your openai api key'),
       temperature: new types.Range(
@@ -97,6 +98,11 @@ const template = {
         { min: 0, max: 1, step: 0.05 }
       ),
       language: new types.Input('')      
+      },
+      GoogleGemeni:{
+        enabled: new types.Switch(true),
+        apiKey: new types.Input('', 'Enter your google api key')     
+      }
     }
   },
   menu: {

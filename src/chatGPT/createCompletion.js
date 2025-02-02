@@ -7,7 +7,7 @@ const PARAMS = {
     // frequency_penalty: 1.0,
 }
 
-function createCompletion(stateSetter, messages, temperature, key) {
+function createCompletionChatGPT(stateSetter, messages, temperature, key) {
   const controller = new AbortController()
   
   return ({ 
@@ -98,4 +98,4 @@ function errorParser(data, acc) {
   return acc
 }
 
-export default createCompletion
+export default createCompletionChatGPT

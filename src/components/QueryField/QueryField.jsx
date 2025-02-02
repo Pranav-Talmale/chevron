@@ -5,7 +5,8 @@ import useRedirect from '../../hooks/useRedirect'
 import { SettingsContext } from '../../contexts/Settings'
 import { useStateSelector, useUpdate } from '../../contexts/Store'
 import Suggestions from '../Suggestions/Suggestions'
-import AIcompletion from '../AIcompletion/AIcompletion'
+import GPTAIcompletion from '../AIcompletion/GPTcompletion'
+import GeminiAIcompletion from '../AIcompletion/GeminiCompletion'
 import { allowedModes, activeKeys } from '../../rules'
 import googleAutocomplete from '../../autocomplete/googleAutocomplete'
 import History from '../../classes/localStorage/history'
@@ -163,7 +164,8 @@ function QueryField () {
     <div
       className={classes['container']} 
       style={variables}>
-        <AIcompletion query={aiQuery} className={classes['ai-completion']} />
+        <GPTAIcompletion query={aiQuery} className={classes['ai-completion']} />
+        <GeminiAIcompletion query={aiQuery} className={classes['ai-completion']} />
         { input }
         { parsedQuery.value && <Suggestions
             queryMode={settings.appearance.style}
